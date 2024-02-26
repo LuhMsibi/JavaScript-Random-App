@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Web2 buttons</title>
+	
+</head>
+<body>
+	<div class="container">
+		<div class="output">
+		<h2>Output</h2>
+		<h3>Programmer memes</h3>
+		<div id="memes-div" class="space">
+			
+		</div>
+		<h3>Tell me something funny!</h3>
+		<div id="jokes-div" class="space">
+			
+		</div>
+		<h3>Give me some wisdom...</h3>
+		<div id="quote-div" class="space">
+			
+		</div>
+		<h3>I wand a riddle!</h3>
+		<div id="riddle-div" class="space">
+			
+		</div>
+	</div>
+	<div class="action">
+		<h2>Actions</h2>
+		<button id="mem" onclick="RandomMeme()" class="ss">Show a meme</button><br>
+		<button id="joke" onclick="Jokes()" class="ss">Tell me a joke</button><br>
+		<button id="quote" onclick="Quotes()" class="ss">Random quote</button><br>
+		<button id="riddle" onclick="Riddles()" class="ss">Riddle me</button><br>
+		<button id="ranswer" onclick="revealRiddle()">show riddle answer</button>
+	</div>
+	</div>
+	
+
+	<script type="text/javascript">
+/*FUNCTION TO CLEAR ALL THE DIVS BEFORE INSERTING NEW CONTENT*/
+		function clearAll(){
+			const memes = document.querySelector('#memes-div');
+			const jokes = document.querySelector('#jokes-div');
+			const quotes = document.querySelector('#quote-div');
+			const riddles = document.querySelector('#riddle-div');
+
+			memes.innerHTML = '';
+			jokes.innerHTML = '';
+			quotes.innerHTML = '';
+			riddles.innerHTML = '';
+		}
+
+		/*MEMES FUNCTION*/
+
+		
+		
+		/*['this is', 'the test', 'array', 'if it', 'works'];*/
+		
+		function RandomMeme(){
+
+			const memesDiv = document.querySelector('#memes-div');
+			const imgElement = document.createElement('img');
+			
+			const Memerand = getRandomData('memesArray');
+			imgElement.setAttribute('src', Memerand);
+			
+
+			clearAll();
+			
+			memesDiv.append(imgElement);
+			
+
+		}
+
+		/*tHE jOKES FUNCTION*/
+		 
+		function Jokes() {
+			const randomJoke = getRandomData('jokesArray');
+			const jokesDiv = document.querySelector('#jokes-div');
+			const jokesPara = document.createElement('p');
+			jokesPara.textContent = randomJoke;
+
+			const hasPara = jokesDiv.querySelector('p');
+			if(hasPara){
+				jokesDiv.innerHTML = '';
+			}
+			clearAll();
+
+			jokesDiv.append(jokesPara);
+		}
+
+		/*tHE QUOTES FUNCTION*/
+
+	
+
+		function Quotes(){
+			const randomQuote = getRandomData('quotesArray');
+			const quoteDiv = document.querySelector('#quote-div');
+			const quote = document.createElement('p');
+			const author = document.createElement('p');
+			quote.textContent = randomQuote.quote;
+			author.textContent = "-" + randomQuote.author;
+			
+
+			clearAll();
+			quoteDiv.append(quote);
+			quoteDiv.append(author);
+		}
+
+		/*THIS IS THE RIDDLE FUNCTION*/
+
+		
+
+		function Riddles(){
+			const randomRiddle = getRandomData('riddlesArray');
+			const riddleDiv = document.querySelector('#riddle-div');
+
+			const question = document.createElement('p');
+			const answer = document.createElement('p');
+
+			question.textContent = randomRiddle.question;
+			answer.textContent = "answer is: " + randomRiddle.answer;
+			answer.setAttribute('id', 'riddle-answer');
+			answer.hidden = true;
+
+			clearAll();
+
+			riddleDiv.append(question);
+			riddleDiv.append(answer);
+		}
+
+		/*The following function is to reveal the riddle answer*/
+
+		function revealRiddle(){
+			const riddleDiv = document.querySelector('#riddle-div');
+			const riddle = riddleDiv.querySelector('p');
+			const answer = document.querySelector('#riddle-answer');
+
+			if(riddle && answer.hidden){
+				answer.hidden = false;
+			}else if (riddle){
+				alert('The answer is already revealed'); 
+			}
+			else{
+				alert('There is no riddle to reveal answer for');
+			}
+
+			/*if (answer.hidden === true){
+				answer.hidden = false;
+			}
+		 	else if (answer.hidden === false){
+				alert('The answer is already revealed');
+			}
+			else if (riddleDiv.innerHTML === ''){
+				
+				alert('There is no riddle to reveal answer for');
+			}*/
+
+		}
+
+
+
+
+
+
+
+
+const memesArray = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg', 'images/5.jpg', 'images/6.jpg', 'images/7.jpg'];
+
+
+const jokesArray = ['Eight bytes walk into a bar. The bartender asks, "Can I get you anything?" "Yeah," reply the bytes. "Make us a double."', 'All programmers are playwriters, and all computers are lousy actors.', 'Have you heard about the the new Cray super computer? it is so fast, it executes an infinite loop in 6 seconds.', '"Debugging" is like being the detective in a crime drama where you are also a murderer.', 'There are two ways to write-error free programmes; only the third one works.'];
+
+
+	const quotesArray = [{quote: 'programmes must be written for people to read, and only incidentally for machines to execute.', author: 'Herold Abelson'}, {quote: 'Programming today is a race between software eenginners striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far the universe is winning.', author: 'Rick Cook'}, {quote: 'Always code as if the guy who ends up maintaining your code will be violent pyschopath who knows where you live', author: 'John Woods'}];
+
+	const riddlesArray = [{question: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind', answer: 'An echo'}, {question: 'You measure my life in hours and I serve you by expiring. I`m quick when I`m thin and slow when I`m fat. The wind is my enemy', answer: 'A candle'}, {question: 'I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What em I?', answer: 'A map'}, {question: 'What is seen in the middle of March and April that can`t be seen at the beginning or end of either month?', answer: 'The letter "R"'}, {question: 'You see a boat filled with people. It has not sunk, but when you look again you don`t see a single person on the boat. Why?', answer: 'All the people are married'}];
+
+
+
+/*DO NOT TOUCH THE BELOW CODE*/
+
+		function rn(len){
+			return Math.floor(Math.random() * len);
+		}
+		
+		function getRandomData(type){
+			return data[type][rn(data[type].length)];
+		}
+		const data = {
+			memesArray,
+			jokesArray,
+			quotesArray,
+			riddlesArray
+		};
+
+	</script>
+</body>
+</html>
